@@ -24,6 +24,8 @@ Each component of the assignment is associated with a unit test found in the tes
 * On windows: `> gradlew test`
 * On Mac/Linux: `> gradle test`
 
+You can also simply "Run All Tests" from your IDE as well. In either case you will see which pass and which do not.
+
 ## Assignment
 
 1. Fork this repository
