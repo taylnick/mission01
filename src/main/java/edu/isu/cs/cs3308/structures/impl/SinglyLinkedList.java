@@ -1,7 +1,7 @@
 package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.List;
-
+import java.io.PrintStream;
 
 /**
  * Singly Linked List to track inputs of scores
@@ -108,7 +108,7 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void insert(E element, int index) {
-        if(index <= 0 || index > size) return;
+        if(index <= 0 || index > size || element == null) return;
 
         Node<E> newNode = new Node<>(element);
 
@@ -121,6 +121,7 @@ public class SinglyLinkedList<E> implements List<E> {
         newNode.setNextNode(currentNode.getNextNode());
         currentNode.setNextNode(newNode);
         size++;
+
     }
 
     @Override
@@ -167,6 +168,14 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public void printList() {
+        if(size == 0) return;
+        Node<E> currentNode = head;
+        int counter = 0;
+        while(counter < size){
+            System.out.println(currentNode.getData());
+            currentNode = currentNode.getNextNode();
+            counter ++;
+        }
 
     }
 }
