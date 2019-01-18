@@ -5,7 +5,8 @@ import java.io.PrintStream;
 
 /**
  * Singly Linked List to track inputs of scores
- * @param <E>
+ * @author NNTaylor
+ * @param <E> element type
  */
 
 public class SinglyLinkedList<E> implements List<E> {
@@ -14,13 +15,20 @@ public class SinglyLinkedList<E> implements List<E> {
     protected Node<E> tail;
     protected int size;
 
-
+    /**
+     *
+     * @return data from head node or null if empty
+     */
     @Override
     public E first() {
         if(isEmpty()) return null;
         return head.getData();
     }
 
+    /**
+     *
+     * @return data from tail or null if empty
+     */
     @Override
     public E last() {
         if(isEmpty()) return null;
@@ -28,6 +36,10 @@ public class SinglyLinkedList<E> implements List<E> {
         return tail.getData();
     }
 
+    /**
+     * Adds element in new tail node at the end of the list or returns null if the list is empty
+     * @param element Element to be added to the end of the list.
+     */
     @Override
     public void addLast(E element) {
         if(element == null) return;
@@ -47,6 +59,10 @@ public class SinglyLinkedList<E> implements List<E> {
 
     }
 
+    /**
+     * Adds element to the front of the list in a new head node, or returns null if the list is empty.
+     * @param element Element to be added to the front of the list.
+     */
     @Override
     public void addFirst(E element) {
         if(element == null) return;
@@ -65,6 +81,10 @@ public class SinglyLinkedList<E> implements List<E> {
         size++;
     }
 
+    /**
+     * removes the head node and moves head pointer.
+     * @return data from the head node or null if list is empty
+     */
     @Override
     public E removeFirst() {
         if(isEmpty()) return null;
@@ -86,6 +106,10 @@ public class SinglyLinkedList<E> implements List<E> {
         return removedData;
     }
 
+    /**
+     * removes tail from list and reassigns tail to the previous node via iteration.
+     * @return data from the tail node or null if list is empty
+     */
     @Override
     public E removeLast() {
         if(size == 0) return null;
@@ -106,6 +130,11 @@ public class SinglyLinkedList<E> implements List<E> {
         return removedData;
     }
 
+    /**
+     * Inserts given element to the given index unless index is out of bounds of the currrent list
+     * @param element Element to be added (as long as it is not null).
+     * @param index Index in the list where the element is to be inserted.
+     */
     @Override
     public void insert(E element, int index) {
         if(index <= 0 || index > size || element == null) return;
@@ -124,6 +153,11 @@ public class SinglyLinkedList<E> implements List<E> {
 
     }
 
+    /**
+     * removes the node at the given index and returns its data unless out of bounds of the list.
+     * @param index Index of the element to remove
+     * @return data at the given index
+     */
     @Override
     public E remove(int index) {
         if(index <= 0 || index >= size) return null;
@@ -141,6 +175,11 @@ public class SinglyLinkedList<E> implements List<E> {
         return dataToRemove;
     }
 
+    /**
+     * returns data at the given index unless it is out of bounds of the list.
+     * @param index Index of the value to be retrieved.
+     * @return data at given index
+     */
     @Override
     public E get(int index) {
         if(index < 0 || index >= size) return null;
@@ -156,16 +195,27 @@ public class SinglyLinkedList<E> implements List<E> {
         return currentNode.getData();
     }
 
+    /**
+     * returns the current size of the list
+     * @return current size of the list
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * checks size of the list and returns true if the list is empty
+     * @return true if the list is empty
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * iterates through the list and prints the data at each index.
+     */
     @Override
     public void printList() {
         if(size == 0) return;
