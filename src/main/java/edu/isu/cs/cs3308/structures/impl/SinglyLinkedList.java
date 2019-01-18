@@ -12,7 +12,8 @@ public class SinglyLinkedList<E> implements List<E> {
 
     protected Node<E> head;
     protected Node<E> tail;
-    protected int size = 0;
+    protected int size;
+
 
     @Override
     public E first() {
@@ -23,6 +24,7 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E last() {
         if(isEmpty()) return null;
+        if(size ==1) return head.getData();
         return tail.getData();
     }
 
@@ -33,16 +35,16 @@ public class SinglyLinkedList<E> implements List<E> {
         Node<E> newNode = new Node<>(element);
 
         if(isEmpty()){
-            newNode.setNextNode(null);
             head = newNode;
             tail = newNode;
             size++;
-            return;
+        }
+        else{
+            tail.setNextNode(newNode);
+            tail = newNode;
+            size++;
         }
 
-        newNode.setNextNode(null);
-        tail = newNode;
-        size++;
     }
 
     @Override
@@ -66,8 +68,17 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E removeFirst() {
         if(isEmpty()) return null;
+
         E removedData = head.getData();
+
         Node<E> tempNode = head;
+        if(size ==1 ){
+            head = null;
+            tail = null;
+            tempNode.setNextNode(null);
+            size --;
+            return removedData;
+        }
         head = head.getNextNode();
         tempNode.setNextNode(null);
         size --;
@@ -78,25 +89,32 @@ public class SinglyLinkedList<E> implements List<E> {
     @Override
     public E removeLast() {
         if(size == 0) return null;
+        if(size == 1){
+            return removeFirst();
+        }
         E removedData = tail.getData();
 
         Node<E> currentNode = head;
-        for (int i = 0; i<size; size++) currentNode = currentNode.getNextNode();
-
-        tail = currentNode;
-        currentNode.setNextNode(null);
-        size --;
+        Node<E> temp = head;
+        while(currentNode != null){
+            temp = currentNode;
+            currentNode = currentNode.getNextNode();
+        }
+        tail = temp;
+        size--;
 
         return removedData;
     }
 
     @Override
     public void insert(E element, int index) {
-        if(index <= 0 || index >= size) return;
+        if(index <= 0 || index > size) return;
 
         Node<E> newNode = new Node<>(element);
+
         Node<E> currentNode = head;
-        for(int i = 0; i < index; i++){
+
+        for(int i = 0; i < index-1; i++){
             currentNode = currentNode.getNextNode();
         }
 
@@ -110,7 +128,7 @@ public class SinglyLinkedList<E> implements List<E> {
         if(index <= 0 || index >= size) return null;
 
         Node<E> currentNode = head;
-        for(int i = 0; i < index; i++){
+        for(int i = 0; i < index-1; i++){
             currentNode = currentNode.getNextNode();
         }
         Node<E> nodeToRemove = currentNode.getNextNode();
@@ -124,10 +142,13 @@ public class SinglyLinkedList<E> implements List<E> {
 
     @Override
     public E get(int index) {
-        if(index <= 0 || index >= size) return null;
+        if(index < 0 || index >= size) return null;
+        if(index == 0) return head.getData();
+        if(size == index) return tail.getData();
 
         Node<E> currentNode = head;
         for(int i = 0; i < index; i++){
+            if(currentNode.getNextNode() == null)break;
             currentNode = currentNode.getNextNode();
         }
 

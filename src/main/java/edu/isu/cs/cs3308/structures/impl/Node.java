@@ -15,6 +15,7 @@ public class Node<E> {
      */
     public Node(E data){
         this.data = data;
+        this.setNextNode(null);
     }
 
     public E getData() {
@@ -29,7 +30,7 @@ public class Node<E> {
         return nextNode;
     }
 
-    public void setNextNode(Node<E> nextNode) {
-        this.nextNode = nextNode;
+    public void setNextNode(Node<E> next) {
+        this.nextNode = next;
     }
 }
